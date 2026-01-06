@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DTZ | Login</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:#050505;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  font-family:'Poppins',sans-serif;
+  color:#e5e7eb;
+  overflow:hidden;
+  padding:30px 0;
+}
+
+/* ===== Bubbles Wrapper ===== */
+.bubbles-wrapper{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  overflow:hidden;
+}
+
+/* ===== Bubbles ===== */
+.bubble{
+  position:absolute;
+  bottom:-20px;
+  border-radius:50%;
+  background:#00f2ff;
+  opacity:.6;
+  animation:floatUp linear forwards;
+}
+@keyframes floatUp{
+  to{transform:translateY(-150vh);opacity:0}
+}
+
+/* ===== Boxes Container ===== */
+.boxes-container{
+  position:relative;
+  z-index:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:30px;
+  width:90%;
+  max-width:1400px;
+  padding:20px;
+}
+
+/* ===== Common Box Styles ===== */
+.box{
+  position:relative;
+  width:100%;
+  max-width:420px;
+  padding:35px 25px;
+  background:#0b0b0b;
+  border-radius:22px;
+  text-align:center;
+}
+
+/* ===== Special Neon Effect for Main Login Box ===== */
+#nuro::before,
+#nuro::after{
+  content:"";
+  position:absolute;
+  inset:-3px;
+  border-radius:22px;
+  background:conic-gradient(
+    from var(--angle),
+    transparent 65%,
+    #00f2ff,
+    #00bcd4,
+    #00f2ff
+  );
+  animation:spin 4s linear infinite;
+  z-index:-1;
+}
+#nuro::before{
+  filter:blur(1.3rem);
+  opacity:.7;
+}
+
+/* Standard Neon Border for Other Boxes */
+@property --angle{
+  syntax:"<angle>";
+  initial-value:0deg;
+  inherits:false;
+}
+@property --angle{
+  syntax:"<angle>";
+  initial-value:0deg;
+  inherits:true;
+}
+.box::before{
+  content:'';
+  position:absolute;
+  inset:-3px;
+  border-radius:22px;
+  background:conic-gradient(from var(--angle), #00f2ff, #00bcd4, #00f2ff);
+  padding:3px;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  animation:rotate 5s linear infinite;
+  z-index:-1;
+}
+
+@keyframes spin{
+  to{--angle:360deg;}
+}
+@keyframes rotate{
+  to{--angle:360deg;}
+}
+
+/* ===== Titles ===== */
+.box h2{
+  font-family:'Orbitron',sans-serif;
+  color:#00f2ff;
+  font-size:28px;
+  margin-bottom:10px;
+  text-shadow:0 0 15px #00f2ff;
+}
+.box p{
+  opacity:.6;
+  margin-bottom:20px;
+}
+
+/* ===== Inputs ===== */
+.input{
+  width:100%;
+  padding:12px;
+  margin-bottom:16px;
+  border-radius:12px;
+  background:#000;
+  border:2px solid #00f2ff;
+  color:#00f2ff;
+  outline:none;
+  font-size:15px;
+  box-shadow:0 0 12px #00f2ff;
+  transition: all 0.3s;
+}
+.input:focus{
+  box-shadow:0 0 20px #00f2ff;
+  border-color:#00f2ff;
+}
+
+/* ===== Buttons ===== */
+.button{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:50px;
+  font-size:16px;
+  font-weight:600;
+  cursor:pointer;
+  box-shadow:0 0 20px #00f2ff;
+  transition:.3s;
+}
+.button:hover{
+  background:#000;
+  color:#00f2ff;
+  box-shadow:0 0 40px #00f2ff, 0 0 80px #00f2ff, 0 0 120px #00f2ff;
+}
+
+/* Specific Buttons */
+.login-btn{background:#00f2ff;color:#000;}
+.google-btn{background:#00f2ff;color:#000;}
+.github-btn{background:#00f2ff;color:#000;}
+
+/* ===== Responsive Design ===== */
+@media screen and (min-width: 768px) {
+  .boxes-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 50px;
+  }
+  .box {
+    flex: 0 1 400px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .boxes-container {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 80px;
+  }
+  .box {
+    flex: 0 1 420px;
+  }
+}
+@media screen and (min-width: 1400px) {
+  .boxes-container {
+    gap: 120px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .box {
+    padding: 25px 15px;
+  }
+  .box h2 {
+    font-size: 22px;
+  }
+  .input, .button {
+    font-size: 14px;
+    padding: 12px;
+  }
+  .boxes-container {
+    gap: 20px;
+    padding: 10px;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Bubbles Background -->
+<div class="bubbles-wrapper" id="bubblesWrapper"></div>
+
+<!-- Boxes -->
+<div class="boxes-container">
+  <!-- Main Email/Password Login -->
+  <div class="box" id="nuro">
+    <h2>LOGIN</h2>
+    <p>Login to NURO'S WEB</p>
+    <form action="https://your-backend-login-endpoint.com/login" method="POST"> <!-- ඔයාගේ real backend URL එක මෙතන දාන්න -->
+      <input class="input" type="email" name="email" placeholder="Email" required>
+      <input class="input" type="password" name="password" placeholder="Password" required>
+      <button type="submit" class="button login-btn">LOGIN</button>
+    </form>
+  </div>
+
+  <!-- Google Login -->
+  <div class="box">
+    <h2>Login with Google</h2>
+    <a href="https://your-backend-auth-endpoint.com/auth/google">
+      <button type="button" class="button google-btn">GOOGLE LOGIN</button>
+    </a>
+  </div>
+
+  <!-- GitHub Login -->
+  <div class="box">
+    <h2>Login with GitHub</h2>
+    <a href="https://your-backend-auth-endpoint.com/auth/github">
+      <button type="button" class="button github-btn">GITHUB LOGIN</button>
+    </a>
+  </div>
+</div>
+
+<script>
+// Create bubbles
+function bubble(){
+  const b=document.createElement("div");
+  b.className="bubble";
+  const s=Math.random()*10+6;
+  b.style.width=b.style.height=s+"px";
+  b.style.left=Math.random()*100+"%";
+  b.style.animationDuration=(Math.random()*4+4)+"s";
+  document.getElementById('bubblesWrapper').appendChild(b);
+  setTimeout(()=>b.remove(),9000);
+}
+setInterval(bubble,35);
+</script>
+
+</body>
+</html>
